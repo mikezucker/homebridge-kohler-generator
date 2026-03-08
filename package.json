@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-kohler-generator",
+  "name": "@mikezucker/homebridge-kohler-generator",
   "displayName": "Kohler Generator",
   "type": "module",
   "version": "1.0.0",
@@ -17,10 +17,10 @@
   },
   "keywords": [
     "homebridge-plugin",
-  "homebridge",
-  "kohler",
-  "rehlko",
-  "generator"
+    "homebridge",
+    "kohler",
+    "rehlko",
+    "generator"
   ],
   "main": "dist/index.js",
   "engines": {
