@@ -2,18 +2,18 @@
   "name": "@mikezucker/homebridge-kohler-generator",
   "displayName": "Kohler Generator",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "private": false,
   "description": "Homebridge plugin for Kohler/Rehlko standby generator monitoring and outage/test notifications.",
   "author": "Michael Zucker",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/michael-zucker/homebridge-kohler-generator#readme",
+  "homepage": "https://github.com/mikezucker/homebridge-kohler-generator#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/michael-zucker/homebridge-kohler-generator.git"
+    "url": "https://github.com/mikezucker/homebridge-kohler-generator.git"
   },
   "bugs": {
-    "url": "https://github.com/michael-zucker/homebridge-kohler-generator/issues"
+    "url": "https://github.com/mikezucker/homebridge-kohler-generator/issues"
   },
   "keywords": [
     "homebridge-plugin",

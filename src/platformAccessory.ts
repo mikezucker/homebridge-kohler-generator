@@ -38,7 +38,7 @@ export class ExamplePlatformAccessory {
   private utilityService: Service;
 
   private batteryService: Service;
-  private utilityVoltageService: Service;
+  private utilityVoltageService?: Service;
 
   private eveServices: EveServices;
   private eveChars: EveCharacteristics;
@@ -117,7 +117,9 @@ export class ExamplePlatformAccessory {
     );
 
     // Eve Voltage default
-    this.utilityVoltageService.getCharacteristic(this.eveChars.Voltage).updateValue(0);
+    if (this.utilityVoltageService && this.eveChars.Voltage) {
+      this.utilityVoltageService.getCharacteristic(this.eveChars.Voltage).updateValue(0);
+    }
   }
 
   private removeLegacyNamedServiceIfPresent(name: string) {
@@ -176,8 +178,15 @@ export class ExamplePlatformAccessory {
     return svc;
   }
 
-  private getOrReplaceEveVoltageService(name: string, subtype: string): Service {
+  private getOrReplaceEveVoltageService(name: string, subtype: string): Service | undefined {
     const EveVoltage = this.eveServices.VoltageSensor; // typed WithUUID<typeof Service>
+
+    if (!EveVoltage || !this.eveChars.Voltage) {
+      this.platform.log.warn(
+        `[${this.accessory.displayName}] Eve Voltage service unavailable; skipping utility voltage accessory.`,
+      );
+      return undefined;
+    }
 
     // Prefer subtype lookup (stable)
     let svc = this.accessory.getServiceById(EveVoltage, subtype) as Service | undefined;
@@ -291,7 +300,7 @@ export class ExamplePlatformAccessory {
     }
 
     if (utilityVoltageV !== undefined) {
-      this.utilityVoltageService.getCharacteristic(this.eveChars.Voltage).updateValue(utilityVoltageV);
+      this.utilityVoltageService?.getCharacteristic(this.eveChars.Voltage).updateValue(utilityVoltageV);
     }
 
     this.accessory
@@ -307,6 +316,6 @@ export class ExamplePlatformAccessory {
     this.faultService.setCharacteristic(this.platform.Characteristic.Name, `${baseName} Fault`);
     this.utilityService.setCharacteristic(this.platform.Characteristic.Name, `${baseName} Utility Power`);
     this.batteryService.setCharacteristic(this.platform.Characteristic.Name, `${baseName} Battery`);
-    this.utilityVoltageService.setCharacteristic(this.platform.Characteristic.Name, `${baseName} Utility Voltage`);
+    this.utilityVoltageService?.setCharacteristic(this.platform.Characteristic.Name, `${baseName} Utility Voltage`);
   }
 }
