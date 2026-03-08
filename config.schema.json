@@ -1,0 +1,39 @@
+{
+  "pluginAlias": "KohlerGenerator",
+  "pluginType": "platform",
+  "singular": true,
+  "strictValidation": false,
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["email", "password"],
+    "properties": {
+      "name": {
+        "title": "Platform Name",
+        "type": "string",
+        "default": "Kohler Generator"
+      },
+      "email": {
+        "title": "Kohler/Rehlko Account Email",
+        "type": "string"
+      },
+      "password": {
+        "title": "Kohler/Rehlko Account Password",
+        "type": "string",
+        "format": "password"
+      },
+      "pollSeconds": {
+        "title": "Poll Interval (seconds)",
+        "type": "integer",
+        "default": 30,
+        "minimum": 10,
+        "maximum": 300
+      },
+      "debug": {
+        "title": "Enable Debug Logging",
+        "type": "boolean",
+        "default": false
+      }
+    }
+  }
+}
